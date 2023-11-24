@@ -1,7 +1,6 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@extends('layouts.KKP')
 
-
-
+@section('citizenIndex')
 <div id="default-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
@@ -52,3 +51,4 @@
         </span>
     </button>
 </div>
+@endsection
