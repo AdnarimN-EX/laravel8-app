@@ -347,7 +347,7 @@ class Citizen extends Model
         if ($request->filled('birthdate')) {
             $query->where('birthdate', 'LIKE', '%' . $request->input('birthdate') . '%');
         }
-        return $query;
+        return $query->orderBy('id','asc');
     }
 
     public function getGenderStats()
