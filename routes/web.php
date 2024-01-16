@@ -26,3 +26,8 @@ Route::get('/statistics/gender', [StatisticController::class, 'genderStats'])->n
 Route::get('/report/gender', [StatisticController::class, 'reportGender'])->name('statistic.reportGender');
 Route::get('/statistics/sector', [StatisticController::class, 'sectorStats'])->name('statistic.sectorStats');
 Route::get('/report/sector', [StatisticController::class, 'reportSector'])->name('statistic.reportSector');
+
+//
+Route::get('/testing', function(){
+    return view('testing.testing');
+});
