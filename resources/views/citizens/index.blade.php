@@ -27,6 +27,7 @@
                         d="M1 18a.969.969 0 0 0 .933 1h12.134A.97.97 0 0 0 15 18M1 7V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2v5M6 1v4a1 1 0 0 1-1 1H1m0 9v-5h1.5a1.5 1.5 0 1 1 0 3H1m12 2v-5h2m-2 3h2m-8-3v5h1.375A1.626 1.626 0 0 0 10 13.375v-1.75A1.626 1.626 0 0 0 8.375 10H7Z" />
                 </svg>
             </a>
+<<<<<<< HEAD
             <a href="/excel/citizen"
                 class="inline-flex text-white bg-green-700 hover:bg-green-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 type="button">
@@ -35,6 +36,8 @@
                     <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM12 6h-2v2h2v2h-2v2h2v2h-2v2h2v2h-2v-2H8v-2h2v-2H8v-2h2V8H8V6h2V4H8V2h2v2h2v2Z"/>
                   </svg>
             </a>
+=======
+>>>>>>> d8dac92f15055b8f790b9a17429b0e821c56cd3b
         </div>
     </div>
 
@@ -73,7 +76,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($citizens as $item)
+                @foreach ($citizens as $item)          
                     <tr class="bg-gray-300 border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $item->id }}
@@ -237,4 +240,6 @@
             </button>
         </form>
     </div>
+    </div>
+    
 @endsection
