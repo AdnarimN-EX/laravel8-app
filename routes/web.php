@@ -27,13 +27,10 @@ Route::get('/report/gender', [StatisticController::class, 'reportGender'])->name
 Route::get('/statistics/sector', [StatisticController::class, 'sectorStats'])->name('statistic.sectorStats');
 Route::get('/report/sector', [StatisticController::class, 'reportSector'])->name('statistic.reportSector');
 
-<<<<<<< HEAD
+
 Route::get('/excel/citizen', [CitizensController::class, 'reportExcel'])->name('statistic.reportExcel');
 Route::get('/excel/users', [StatisticController::class, 'excelAllUsers'])->name('statistic.excelAllUsers');
 
-=======
-//
 Route::get('/testing', function(){
     return view('testing.testing');
 });
->>>>>>> d8dac92f15055b8f790b9a17429b0e821c56cd3b
