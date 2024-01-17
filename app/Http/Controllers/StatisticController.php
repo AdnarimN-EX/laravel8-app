@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CitizenExport;
+use App\Exports\UsersExport;
 use App\Models\Citizen;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class StatisticController extends Controller
 {
@@ -13,7 +15,7 @@ class StatisticController extends Controller
     {
         $citizen = new Citizen();
         $genderCounts = $citizen->getGenderStats();
-    
+
         return view('statistics.genderStats', [
             'barangays' => session('barangays'),
             'gender' => session('gender'),
@@ -32,24 +34,31 @@ class StatisticController extends Controller
             'countSector' => $countSector,
         ]);
     }
-    
-    public function reportGender(){
+
+    public function reportGender()
+    {
         $barangay = session('barangays');
         $gender = session('gender');
         $countGender = session('countGender');
 
-        $pdf = Pdf::loadView('statistics.genderReport', ['barangays' => $barangay, 'gender'=>$gender, 'countGender'=>$countGender])->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('statistics.genderReport', ['barangays' => $barangay, 'gender' => $gender, 'countGender' => $countGender])->setPaper('a4', 'landscape');
 
         return $pdf->stream('report.pdf');
     }
 
-    public function reportSector(){
+    public function reportSector()
+    {
         $barangay = session('barangays');
         $sector = session('sector');
         $countSector = session('countSector');
 
-        $pdf = Pdf::loadView('statistics.sectorReport', ['barangays' => $barangay, 'sector'=>$sector, 'countSector'=>$countSector])->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('statistics.sectorReport', ['barangays' => $barangay, 'sector' => $sector, 'countSector' => $countSector])->setPaper('a4', 'landscape');
 
         return $pdf->stream('report.pdf');
+    }
+
+    public function excelAllUsers()
+    {
+        return Excel::download(new UsersExport, 'all-users.xlsx');
     }
 }

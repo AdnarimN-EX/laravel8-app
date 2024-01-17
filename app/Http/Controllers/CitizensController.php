@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CitizenExport;
 use App\Models\Citizen;
 use App\Models\Citizens;
 use App\Models\DependentRange;
@@ -12,6 +13,7 @@ use App\Models\LivelihoodStatus;
 use App\Models\TenurialStatus;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CitizensController extends Controller
 {
@@ -45,6 +47,10 @@ class CitizensController extends Controller
         $pdf = Pdf::loadView('citizens.report', ['citizen' => $reportData])->setPaper('a4', 'landscape');
 
         return $pdf->stream('report.pdf');
+    }
+
+    public function reportExcel(){
+        return Excel::download(new CitizenExport, 'citizens.xlsx');
     }
     
     public function create()
@@ -94,6 +100,7 @@ class CitizensController extends Controller
         Citizen::create($requestData);
         return redirect(route('citizens.index'));
     }
+
     public function testing(){
         return view('citizens.testing');
     }
