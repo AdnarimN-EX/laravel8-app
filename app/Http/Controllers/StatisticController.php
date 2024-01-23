@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\CitizenExport;
+use App\Exports\GenderExport;
+use App\Exports\SectorExport;
 use App\Exports\UsersExport;
 use App\Models\Citizen;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -57,8 +59,12 @@ class StatisticController extends Controller
         return $pdf->stream('report.pdf');
     }
 
-    public function excelAllUsers()
+    public function excelAllGender()
     {
-        return Excel::download(new UsersExport, 'all-users.xlsx');
+        return Excel::download(new GenderExport, 'gender.xlsx');
+    }
+    public function excelAllSector()
+    {
+        return Excel::download(new SectorExport, 'sector.xlsx');
     }
 }

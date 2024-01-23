@@ -29,7 +29,9 @@ Route::get('/report/sector', [StatisticController::class, 'reportSector'])->name
 
 
 Route::get('/excel/citizen', [CitizensController::class, 'reportExcel'])->name('statistic.reportExcel');
-Route::get('/excel/users', [StatisticController::class, 'excelAllUsers'])->name('statistic.excelAllUsers');
+Route::get('/excel/gender', [StatisticController::class, 'excelAllGender'])->name('statistic.excelAllGender');
+Route::get('/excel/sector', [StatisticController::class, 'excelAllSector'])->name('statistic.excelAllSector');
+
 
 Route::get('/testing', function(){
     return view('testing.testing');

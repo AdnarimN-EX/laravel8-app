@@ -2,18 +2,19 @@
 
 namespace App\Exports;
 
-use App\Models\Citizen;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class CitizenExport implements FromView, ShouldAutoSize
+class SectorExport implements FromView, ShouldAutoSize
 {
     public function view(): View
     {
-        return view('citizens.report', [
-            'citizen' => session('search_results')
+        return view('statistics.sectorReport', [
+            'barangays' => session('barangays'),
+            'sector'=> session('sector'),
+            'countSector'=>session('countSector')
         ]);
     }
 }
