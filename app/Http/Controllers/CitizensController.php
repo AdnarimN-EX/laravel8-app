@@ -13,7 +13,10 @@ use App\Models\LivelihoodStatus;
 use App\Models\TenurialStatus;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use Svg\Tag\Circle;
 
 class CitizensController extends Controller
 {
@@ -23,12 +26,42 @@ class CitizensController extends Controller
         $gender = Gender::all();
         
         $query = Citizen::FilterSearch($request);
-    
+
+        // $usersCollection = new Collection();
+
+        // Citizen::chunk(1000, function ($users) use ($usersCollection) {
+        //     foreach ($users as $user) {
+        //         // Add each user to the collection
+        //         $usersCollection->push($user);
+        //     }
+        // });
+
+        // $totalCounts = [];
+
+        // Citizen::select('barangay', 'gender_id')
+        //     ->orderBy('barangay')
+        //     ->orderBy('gender_id')
+        //     ->chunk(1000, function ($citizens) use (&$totalCounts) {
+        //         foreach ($citizens as $citizen) {
+        //             // Example of custom aggregation logic
+        //             $key = $citizen->barangay . '-' . $citizen->gender_id;
+        //             if (!isset($totalCounts[$key])) {
+        //                 $totalCounts[$key] = 0;
+        //             }
+        //             $totalCounts[$key]++;
+        //         }
+        //     });
+        
+        // ddd($totalCounts);
         // Get the unpaginated results
         $unpaginatedResults = $query->get();
+
+        // ddd($unpaginatedResults);
     
         // Paginate the results while maintaining filters
         $paginatedResult = $query->paginate(20)->appends(request()->query());
+
+        // ddd($paginatedResult);
     
         // Store unpaginated data into session 
         session(['search_results' => $unpaginatedResults]);

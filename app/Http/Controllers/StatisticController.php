@@ -15,13 +15,42 @@ class StatisticController extends Controller
     //
     public function genderStats()
     {
-        $citizen = new Citizen();
-        $genderCounts = $citizen->getGenderStats();
-
+        $genderCounts = [];
+    
+        Citizen::select('barangay', 'gender_id')
+            ->orderBy('barangay')
+            ->orderBy('gender_id')
+            ->chunk(10000, function ($citizens) use (&$genderCounts) {
+                foreach ($citizens as $citizen) {
+                    $key = $citizen->barangay . '-' . $citizen->gender_id;
+                    if (!isset($genderCounts[$key])) {
+                        $genderCounts[$key] = 1;
+                    } else {
+                        $genderCounts[$key]++;
+                    }
+                }
+            });
+    
+        // Assuming you have a way to get barangay and gender names
+        // Here, adapt your logic to match gender IDs to names and compile the data as needed for your view
+    
+        // Assuming session('barangays') and session('gender') are arrays/lists you've previously set
+        $barangays = session('barangays');
+        $genders = session('gender');
+    
+        // Preparing data for the view in the format it expects
+        $compiledResults = [];
+        foreach ($barangays as $barangay) {
+            foreach ($genders as $gender) {
+                $key = $barangay . '-' . $gender->id;
+                $compiledResults[$barangay][$gender->name] = $genderCounts[$key] ?? 0;
+            }
+        }
+    
         return view('statistics.genderStats', [
-            'barangays' => session('barangays'),
-            'gender' => session('gender'),
-            'countGender' => $genderCounts,
+            'barangays' => $barangays,
+            'gender' => $genders,
+            'countGender' => $compiledResults,
         ]);
     }
 

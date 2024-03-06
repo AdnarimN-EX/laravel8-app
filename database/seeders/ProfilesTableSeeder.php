@@ -20,7 +20,7 @@ class ProfilesTableSeeder extends Seeder
 
     public function __construct(Faker $faker)
     {
-        $this->totalProfile = 100;
+        $this->totalProfile = 50000;
         $this->faker = $faker;
     }
 

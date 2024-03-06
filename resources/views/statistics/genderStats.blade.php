@@ -49,19 +49,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($barangays as $barangay)
+                @foreach ($barangays as $barangayName)
                     <tr class="bg-gray-300 border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td>{{ $barangay }}</td>
+                        <td>{{ $barangayName }}</td>
                         @foreach ($gender as $gen)
-                            <?php
-                            $filtered = $countGender
-                                ->where('barangay', $barangay)
-                                ->where('gender_id', $gen->id)
-                                ->first();
-                            ?>
-                            <td scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $filtered ? $filtered->count : 0 }}</td>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $countGender[$barangayName][$gen->name] ?? 0 }}
+                            </td>
                         @endforeach
                     </tr>
                 @endforeach

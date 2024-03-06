@@ -26,7 +26,7 @@ class CitizensTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->totalCitizen = 100;
+        $this->totalCitizen = 50000;
         $now = Carbon::now('Asia/Singapore');
 
         if (!config('database.seed.fresh')) {
