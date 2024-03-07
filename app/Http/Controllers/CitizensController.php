@@ -29,7 +29,7 @@ class CitizensController extends Controller
 
         // $usersCollection = new Collection();
 
-        // Citizen::chunk(1000, function ($users) use ($usersCollection) {
+        // Citizen::chunk(1000, function ($users) use (&$usersCollection) {
         //     foreach ($users as $user) {
         //         // Add each user to the collection
         //         $usersCollection->push($user);
@@ -59,7 +59,7 @@ class CitizensController extends Controller
         // ddd($unpaginatedResults);
     
         // Paginate the results while maintaining filters
-        $paginatedResult = $query->paginate(20)->appends(request()->query());
+        $paginatedResult = $query->paginate(50)->appends(request()->query());
 
         // ddd($paginatedResult);
     
@@ -77,9 +77,10 @@ class CitizensController extends Controller
     public function report(){
         $reportData = session('search_results');
 
+
         $pdf = Pdf::loadView('citizens.report', ['citizen' => $reportData])->setPaper('a4', 'landscape');
 
-        return $pdf->stream('report.pdf');
+        return $pdf->download('report.pdf');
     }
 
     public function reportExcel(){
